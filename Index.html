@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro e Inicio de Sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+            flex-direction: column;
+            color: white;
+        }
+        .contenedor {
+            width: 300px;
+            padding: 20px;
+            background-size: cover;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.767),rgba(0, 0, 0, 0.767)),url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.braui-muehlehorn.ch%2F%3Fw%3Doto%25C3%25B1o-naturaleza-fotograf%25C3%25ADa-hd-wallpaper-08-avance-tt-gG2PlNs5&psig=AOvVaw09PuBePPFZ3X1h1piHRTQ1&ust=1716945314521000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLC5te-Vr4YDFQAAAAAdAAAAABAJ);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .grupo-formulario {
+            margin-bottom: 15px;
+        }
+        .grupo-formulario label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .grupo-formulario input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .grupo-formulario button {
+            width: 100%;
+            padding: 10px;
+            background-color: #C70039;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .grupo-formulario button:hover {
+            background-color: #45a049;
+        }
+        .mensaje {
+            text-align: center;
+            margin-top: 10px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor" id="contenedorRegistro">
+        <h2>Registro</h2>
+        <form id="formularioRegistro">
+            <div class="grupo-formulario">
+                <label for="correoRegistro">Correo Electrónico</label>
+                <input type="email" id="correoRegistro" name="correo" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="contrasenaRegistro">Contraseña</label>
+                <input type="password" id="contrasenaRegistro" name="contrasena" required>
+            </div>
+            <div class="grupo-formulario">
+                <button type="submit">Registrarse</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="contenedor" id="contenedorInicioSesion">
+        <h2>Inicio de Sesión</h2>
+        <form id="formularioInicioSesion">
+            <div class="grupo-formulario">
+                <label for="correoInicioSesion">Correo Electrónico</label>
+                <input type="email" id="correoInicioSesion" name="correo" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="contrasenaInicioSesion">Contraseña</label>
+                <input type="password" id="contrasenaInicioSesion" name="contrasena" required>
+            </div>
+            <div class="grupo-formulario">
+                <button type="submit">Iniciar Sesión</button>
+            </div>
+        </form>
+        <div class="mensaje" id="mensajeInicioSesion"></div>
+    </div>
+
+    <script>
+        document.getElementById('formularioRegistro').addEventListener('submit', function(evento) {
+            evento.preventDefault();
+            const correo = document.getElementById('correoRegistro').value;
+            const contrasena = document.getElementById('contrasenaRegistro').value;
+
+            // Guardar los datos en localStorage
+            localStorage.setItem('correo', correo);
+            localStorage.setItem('contrasena', contrasena);
+
+            alert('Registro exitoso. Ahora puede iniciar sesión.');
+            document.getElementById('formularioRegistro').reset();
+        });
+
+        document.getElementById('formularioInicioSesion').addEventListener('submit', function(evento) {
+            evento.preventDefault();
+            const correo = document.getElementById('correoInicioSesion').value;
+            const contrasena = document.getElementById('contrasenaInicioSesion').value;
+
+            const correoGuardado = localStorage.getItem('correo');
+            const contrasenaGuardada = localStorage.getItem('contrasena');
+
+            if (correo === correoGuardado && contrasena === contrasenaGuardada) {
+                window.location.href = 'https://www.example.com'; // Cambia esto por la URL deseada
+            } else {
+                const mensajeInicioSesion = document.getElementById('mensajeInicioSesion');
+                mensajeInicioSesion.textContent = 'Correo electrónico o contraseña incorrectos.';
+                mensajeInicioSesion.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
