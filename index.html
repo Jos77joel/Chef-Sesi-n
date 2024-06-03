@@ -116,6 +116,7 @@
             const contrasenaGuardada = localStorage.getItem('contrasena');
 
             if (correo === correoGuardado && contrasena === contrasenaGuardada) {
+                alert('Formulario enviado correctamente');
                 window.location.href = 'https://www.example.com'; // Cambia esto por la URL deseada
             } else {
                 const mensajeInicioSesion = document.getElementById('mensajeInicioSesion');
